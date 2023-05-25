@@ -25,9 +25,13 @@ const Header = () => {
   const nameArray = ["V", "i", "k", "t", "o", "r"];
 
   useEffect(() => {
-    return setTimeout(() => {
+    const timeoutId = setTimeout(() => {
       setLetterClass("text-animate-hover");
     }, 4000);
+
+    return () => {
+      clearTimeout(timeoutId);
+    };
   }, []);
 
   return (
@@ -59,9 +63,8 @@ const Header = () => {
           </div>
 
           <div className="tag-cmp app__flex">
-            <p className="p-text">Nebbonaut</p>
             <p className="p-text">Software Developer</p>
-            <p className="p-text">Trained in ReactJS and Angular</p>
+            <p className="p-text">Trained in Angular and ReactJS</p>
           </div>
         </div>
       </motion.div>
