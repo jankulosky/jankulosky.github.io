@@ -44,10 +44,11 @@ const Work = () => {
 
       <div className="app__work-filter">
         {[
-          "ReactJS",
+          "React",
           "Angular",
           ".NET & Angular",
-          "Spring Boot & React",
+          "Node.js & React",
+          "Spring & React",
           "All",
         ].map((item, index) => (
           <div
@@ -106,12 +107,15 @@ const Work = () => {
 
             <div className="app__work-content app__flex">
               <h4 className="bold-text">{work.title}</h4>
-              <p className="p-text" style={{ marginTop: 10, textAlign: "justify" }}>
+              <p
+                className="p-text"
+                style={{ marginTop: 10, textAlign: "justify" }}
+              >
                 {work.description}
               </p>
 
               <div className="app__work-tag app__flex">
-                <p className="p-text">{work.tags[0]}</p>
+                <p className="p-text">{work.tags && work.tags[0]}</p>
               </div>
             </div>
           </div>
