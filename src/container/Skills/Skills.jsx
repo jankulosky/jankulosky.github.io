@@ -15,7 +15,9 @@ const Skills = () => {
     const skillsQuery = '*[_type == "skills"]';
 
     client.fetch(query).then((data) => {
-      const sortedData = [...data].sort((a, b) => Number(b.year) - Number(a.year));
+      const sortedData = [...data].sort(
+        (a, b) => Number(b.year) - Number(a.year),
+      );
       setExperiences(sortedData);
     });
 
@@ -26,61 +28,99 @@ const Skills = () => {
 
   return (
     <>
-      <h2 className="head-text">Skills & Experiences</h2>
-
-      <div className="app__skills-container">
-        <motion.div className="app__skills-list">
-          {skills.map((skill) => (
-            <motion.div
-              whileInView={{ opacity: [0, 1] }}
-              transition={{ duration: 0.5 }}
-              className="app__skills-item app__flex"
-              key={skill.name}
-            >
-              <div
-                className="app__flex"
-                style={{ backgroundColor: skill.bgColor }}
-              >
-                <img src={urlFor(skill.icon)} alt={skill.name} />
-              </div>
-              <p className="p-text">{skill.name}</p>
-            </motion.div>
-          ))}
-        </motion.div>
-        <div className="app__skills-exp">
-          {experiences.map((experience) => (
-            <motion.div className="app__skills-exp-item" key={experience.year}>
-              <div className="app__skills-exp-year">
-                <p className="bold-text">{experience.year}</p>
-              </div>
-              <motion.div className="app__skills-exp-works">
-                {experience.works.map((work) => (
-                  <React.Fragment key={work.name}>
-                    <motion.div
-                      whileInView={{ opacity: [0, 1] }}
-                      transition={{ duration: 0.5 }}
-                      className="app__skills-exp-work"
-                      data-tip
-                      data-for={work.name}
-                      key={work.name}
-                    >
-                      <h4 className="bold-text">{work.name}</h4>
-                      <p className="p-text">{work.company}</p>
-                    </motion.div>
-                    <ReactTooltip
-                      id={work.name}
-                      effect="solid"
-                      arrowColor="#fff"
-                      className="skills-tooltip"
-                    >
-                      {work.desc}
-                    </ReactTooltip>
-                  </React.Fragment>
-                ))}
-              </motion.div>
-            </motion.div>
-          ))}
+      <div className="skills__hero">
+        <div className="section__heading">
+          <p className="section__eyebrow">Toolkit</p>
+          <h2 className="section__title">
+            Skills & <span>Experience</span>
+          </h2>
         </div>
+        <p className="p-text">
+          Modern frontend craftsmanship with a focus on reliable delivery and
+          clean architecture.
+        </p>
+        <div className="skills__hero-badges">
+          <span>Programming Languages</span>
+          <span>Databases & Cloud</span>
+          <span>Frameworks & Libraries</span>
+          <span>Version control & Tools</span>
+        </div>
+      </div>
+
+      <div className="skills__layout">
+        <motion.div className="skills__skills-board">
+          <div className="skills__board-head">
+            <h3>Expertise</h3>
+            <p className="p-text">
+              Curated set of tools I use to design, ship and scale products.
+            </p>
+          </div>
+          <div className="skills__chip-grid">
+            {skills.map((skill) => (
+              <motion.div
+                whileInView={{ opacity: [0, 1] }}
+                transition={{ duration: 0.5 }}
+                className="skills__chip"
+                key={skill.name}
+              >
+                <div
+                  className="skills__chip-icon"
+                  style={{ backgroundColor: skill.bgColor }}
+                >
+                  <img src={urlFor(skill.icon)} alt={skill.name} />
+                </div>
+                <div className="skills__chip-meta">
+                  <p className="skills__chip-name">{skill.name}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
+
+        <motion.div className="skills__exp-panel">
+          <div className="skills__board-head">
+            <h3>Professional Experience</h3>
+            <p className="p-text">
+              A snapshot of my career timeline including my most recent roles.
+            </p>
+          </div>
+          <div className="skills__exp-list">
+            {experiences.map((experience) => (
+              <motion.div className="skills__exp-item" key={experience.year}>
+                <div className="skills__exp-year">
+                  <span>{experience.year}</span>
+                </div>
+                <div className="skills__exp-roles">
+                  {experience.works.map((work) => (
+                    <React.Fragment key={work.name}>
+                      <motion.div
+                        whileInView={{ opacity: [0, 1] }}
+                        transition={{ duration: 0.5 }}
+                        className="skills__exp-card"
+                        data-tip
+                        data-for={work.name}
+                      >
+                        <div>
+                          <h4>{work.name}</h4>
+                          <p>{work.company}</p>
+                        </div>
+                        <span className="skills__exp-dot" />
+                      </motion.div>
+                      <ReactTooltip
+                        id={work.name}
+                        effect="solid"
+                        arrowColor="#141a2a"
+                        className="skills-tooltip"
+                      >
+                        {work.desc}
+                      </ReactTooltip>
+                    </React.Fragment>
+                  ))}
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
       </div>
     </>
   );
@@ -89,5 +129,5 @@ const Skills = () => {
 export default AppWrap(
   MotionWrap(Skills, "app__skills"),
   "skills",
-  "app__whitebg"
+  "app__whitebg",
 );

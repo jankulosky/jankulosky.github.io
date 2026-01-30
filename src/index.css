@@ -1,20 +1,48 @@
-@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap");
 
 :root {
-  --font-base: "DM Sans", sans-serif;
+  --font-base: "Manrope", "Segoe UI", sans-serif;
+  --font-display: "Space Grotesk", "Segoe UI", sans-serif;
 
-  --primary-color: #edf2f8;
-  --secondary-color: #313bac;
-  --black-color: #030303;
-  --lightGray-color: #e4e4e4;
-  --gray-color: #6b7688;
-  --brown-color: #46364a;
-  --white-color: #ffffff;
+  --bg-color: #0b0f1a;
+  --surface-color: #141a2a;
+  --surface-soft: #1b2337;
+  --text-color: #eef2ff;
+  --muted-color: #a5b0c8;
+  --accent-color: #5becff;
+  --accent-strong: #3f6fe6;
+  --highlight-color: #5b8cff;
+  --border-color: rgba(255, 255, 255, 0.08);
+
+  --shadow-strong: 0 20px 60px rgba(0, 0, 0, 0.45);
+  --shadow-soft: 0 10px 30px rgba(8, 15, 30, 0.35);
+
+  --radius-xl: 32px;
+  --radius-lg: 24px;
+  --radius-md: 16px;
+  --radius-sm: 12px;
 }
 
-* {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
   scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-base);
+  color: var(--text-color);
+  background-color: var(--bg-color);
+}
+
+a {
+  color: inherit;
+}
+
+::selection {
+  background: rgba(77, 214, 200, 0.35);
+  color: var(--text-color);
 }

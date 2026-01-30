@@ -1,14 +1,32 @@
 .app {
-  background-color: var(--primary-color);
+  min-height: 100vh;
   font-family: var(--font-base);
+  background: radial-gradient(
+      1200px 600px at 10% -10%,
+      rgba(77, 214, 200, 0.2),
+      transparent 60%
+    ),
+    radial-gradient(
+      900px 500px at 90% 0%,
+      rgba(255, 184, 108, 0.2),
+      transparent 60%
+    ),
+    var(--bg-color);
+  color: var(--text-color);
 }
 
 .app__whitebg {
-  background-color: var(--white-color);
+  background: linear-gradient(
+      120deg,
+      rgba(77, 214, 200, 0.08),
+      rgba(255, 184, 108, 0.08)
+    ),
+    var(--surface-color);
 }
 
 .app__primarybg {
-  background-color: var(--primary-color);
+  background: linear-gradient(180deg, rgba(11, 15, 26, 0.92), transparent 45%),
+    var(--bg-color);
 }
 
 .app__container {
@@ -17,6 +35,8 @@
 
   display: flex;
   flex-direction: row;
+  position: relative;
+  overflow: hidden;
 }
 
 .app__flex {
@@ -29,16 +49,25 @@
   flex: 1;
   width: 100%;
   flex-direction: column;
-  padding: 4rem 2rem;
+  gap: 2.5rem;
+  padding: 6rem 2.5rem 4rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  align-items: flex-start;
+  justify-content: flex-start;
+
+  @media screen and (max-width: 900px) {
+    padding: 6rem 1.5rem 3rem;
+  }
 
   @media screen and (max-width: 450px) {
-    padding: 4rem 1rem 2rem;
+    padding: 5rem 1rem 2.5rem;
   }
 }
 
 .copyright {
   width: 100%;
-  padding: 2rem 0 0;
+  padding: 2.5rem 0 0;
 
   display: flex;
   flex-direction: column;
@@ -47,16 +76,18 @@
 
   p {
     text-transform: uppercase;
-    color: var(--black-color);
+    color: var(--muted-color);
+    letter-spacing: 0.08em;
+    font-size: 0.7rem;
   }
 }
 
 .p-intro {
-  font-size: 0.8rem;
+  font-size: 0.95rem;
   text-align: left;
-  color: var(--gray-color);
+  color: var(--muted-color);
   line-height: 1.5;
-  cursor: pointer;
+  letter-spacing: 0.02em;
 
   @media screen and (min-width: 2000px) {
     font-size: 1.75rem;
@@ -64,47 +95,56 @@
 }
 
 .intro-text {
-  font-size: 2.75rem;
-  font-weight: 800;
-  text-align: center;
-  color: var(--black-color);
-  text-transform: capitalize;
-  cursor: pointer;
+  font-family: var(--font-display);
+  font-size: 3rem;
+  font-weight: 700;
+  text-align: left;
+  color: var(--text-color);
+  letter-spacing: -0.02em;
 
   @media screen and (min-width: 2000px) {
-    font-size: 4rem;
+    font-size: 4.2rem;
   }
 
   @media screen and (max-width: 450px) {
-    font-size: 2rem;
+    font-size: 2.2rem;
   }
 }
 
-.head-text {
-  font-size: 2.75rem;
-  font-weight: 800;
-  text-align: center;
-  color: var(--black-color);
-  text-transform: capitalize;
+.section__heading {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  align-items: flex-start;
+}
+
+.section__eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.32em;
+  font-size: 0.7rem;
+  color: var(--accent-color);
+}
+
+.section__title {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 1.2rem + 1.4vw, 2.4rem);
+  font-weight: 600;
+  text-align: left;
+  color: var(--text-color);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  margin: 0;
 
   span {
-    color: var(--secondary-color);
-  }
-
-  @media screen and (min-width: 2000px) {
-    font-size: 4rem;
-  }
-
-  @media screen and (max-width: 450px) {
-    font-size: 2rem;
+    color: var(--accent-color);
   }
 }
 
 .p-text {
-  font-size: 0.8rem;
+  font-size: 0.95rem;
   text-align: left;
-  color: var(--gray-color);
-  line-height: 1.5;
+  color: var(--muted-color);
+  line-height: 1.7;
 
   @media screen and (min-width: 2000px) {
     font-size: 1.75rem;
@@ -112,17 +152,18 @@
 }
 
 .bold-text {
-  font-size: 1rem;
-  font-weight: 800;
-  color: var(--black-color);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text-color);
   text-align: left;
+  letter-spacing: 0.01em;
 
   @media screen and (min-width: 2000px) {
     font-size: 2rem;
   }
 
   @media screen and (max-width: 450px) {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
   }
 }
 
@@ -133,14 +174,15 @@
   flex-direction: column;
 
   padding: 1rem;
+  gap: 0.5rem;
 
   a {
-    width: 40px;
-    height: 40px;
+    width: 42px;
+    height: 42px;
     border-radius: 50%;
-    background-color: var(--white-color);
+    background-color: rgba(255, 255, 255, 0.08);
     margin: 0.25rem 0;
-    border: 1px solid var(--lightGray-color);
+    border: 1px solid var(--border-color);
 
     display: flex;
     justify-content: center;
@@ -149,29 +191,18 @@
     transition: all 0.3s ease-in-out;
 
     svg {
-      width: 15px;
-      height: 15px;
-      color: var(--gray-color);
+      width: 16px;
+      height: 16px;
+      color: var(--muted-color);
     }
 
     &:hover {
-      background-color: var(--secondary-color);
-      border-color: var(--secondary-color);
+      background-color: var(--accent-color);
+      border-color: transparent;
+      transform: translateY(-2px);
 
       svg {
-        color: var(--white-color);
-      }
-    }
-
-    @media screen and (min-width: 2000px) {
-      width: 70px;
-      height: 70px;
-
-      margin: 0.5rem 0;
-
-      svg {
-        width: 30px;
-        height: 30px;
+        color: #07201d;
       }
     }
   }
@@ -188,44 +219,41 @@
   .app__navigation-dot {
     width: 10px;
     height: 10px;
-    border-radius: 50%;
-    background-color: #cbcbcb;
+    border-radius: 999px;
+    background-color: rgba(255, 255, 255, 0.2);
     margin: 0.5rem;
 
-    transition: background-color 0.2s ease-in-out;
+    transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out;
 
     &:hover {
-      background-color: var(--secondary-color);
-    }
-
-    @media screen and (min-width: 2000px) {
-      width: 20px;
-      height: 20px;
+      background-color: var(--accent-color);
+      transform: scale(1.2);
     }
   }
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 700px) {
   .app__navigation,
   .app__social {
     display: none;
   }
 
   .copyright {
-    padding: 2rem;
+    padding: 2rem 0 0;
   }
 }
+
 .header img {
-  animation: updown 3s linear infinite;
+  animation: updown 5s ease-in-out infinite;
 }
 @keyframes updown {
   0% {
-    transform: translateY(-20px);
+    transform: translateY(-10px);
   }
   50% {
-    transform: translateY(20px);
+    transform: translateY(12px);
   }
   100% {
-    transform: translateY(-20px);
+    transform: translateY(-10px);
   }
 }

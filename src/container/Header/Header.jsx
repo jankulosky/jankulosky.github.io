@@ -22,6 +22,7 @@ const scaleVariants = {
 
 const Header = () => {
   const [letterClass, setLetterClass] = useState("text-animate");
+  const greetingArray = ["I", "'", "m"];
   const nameArray = ["V", "i", "k", "t", "o", "r"];
 
   useEffect(() => {
@@ -47,12 +48,17 @@ const Header = () => {
               <p className="p-intro">
                 <span className={letterClass}>H</span>
                 <span className={`${letterClass} _10`}>i</span>
-                <span className={`${letterClass} _11`}>,</span>
-                <span className={`${letterClass} _12`}>I</span>
-                <span className={`${letterClass} _13`}>'</span>
-                <span className={`${letterClass} _14`}>m</span>
+                <span className="hello-emoji" aria-hidden="true">
+                  👋
+                </span>
               </p>
               <h1 className="intro-text">
+                <AnimatedLetters
+                  letterClass={letterClass}
+                  strArray={greetingArray}
+                  idx={15}
+                />
+                <> </>
                 <AnimatedLetters
                   letterClass={letterClass}
                   strArray={nameArray}
@@ -63,8 +69,16 @@ const Header = () => {
           </div>
 
           <div className="tag-cmp app__flex">
-            <p className="p-text">Software Developer</p>
-            <p className="p-text">Trained in Angular and ReactJS</p>
+            <p className="p-text">Software Engineer</p>
+            <p className="p-text">.NET, Node.js, Angular and React</p>
+          </div>
+          <div className="app__header-cta">
+            <a className="cta-primary" href="#work">
+              View Projects
+            </a>
+            <a className="cta-secondary" href="#contact">
+              Let’s Connect
+            </a>
           </div>
         </div>
       </motion.div>

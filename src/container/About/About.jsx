@@ -17,27 +17,36 @@ const About = () => {
 
   return (
     <>
-      <h2 className="head-text">
-        I Know that <span>Good Development</span> <br />
-        means <span>Good Business</span>
-      </h2>
+      <div className="about__hero">
+        <div className="section__heading">
+          <p className="section__eyebrow">About</p>
+          <h2 className="section__title">
+            I Know that <span>Good Development</span> <br />
+            means <span>Good Business</span>
+          </h2>
+        </div>
+        <p className="p-text">
+          Product-focused engineering with a love for clean UI and reliable
+          systems.
+        </p>
+      </div>
 
-      <div className="app__profiles">
+      <div className="about__grid">
         {abouts.map((about, index) => (
           <motion.div
             whileInView={{ opacity: 1 }}
-            whileHover={{ scale: 1.1 }}
-            transition={{ duration: 0.5, type: "tween" }}
-            className="app__profile-item"
+            whileHover={{ y: -10 }}
+            transition={{ duration: 0.4, type: "tween" }}
+            className="about__card"
             key={about.title + index}
           >
-            <img src={urlFor(about.imgUrl)} alt={about.title} />
-            <h2 className="bold-text" style={{ marginTop: 20 }}>
-              {about.title}
-            </h2>
-            <p className="p-text" style={{ marginTop: 10 }}>
-              {about.description}
-            </p>
+            <div className="about__media">
+              <img src={urlFor(about.imgUrl)} alt={about.title} />
+            </div>
+            <div className="about__content">
+              <h3>{about.title}</h3>
+              <p>{about.description}</p>
+            </div>
           </motion.div>
         ))}
       </div>

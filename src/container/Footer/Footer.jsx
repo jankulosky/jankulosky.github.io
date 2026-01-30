@@ -42,70 +42,100 @@ const Footer = () => {
 
   return (
     <>
-      <h2 className="head-text">
-        Take a coffee{" "}
-        <img
-          src={images.coffee}
-          alt="coffee"
-          style={{ width: "60px", height: "60px", margin: "-0.7rem 0rem" }}
-        />{" "}
-        & chat with me
-      </h2>
-
-      <div className="app__footer-cards">
-        <div className="app__footer-card ">
-          <img src={images.email} alt="email" />
-          <a href="mailto:viktor.jankuloski@hotmail.com" className="p-text">
-            viktor.jankuloski@hotmail.com
-          </a>
+      <div className="contact__hero">
+        <div className="section__heading">
+          <p className="section__eyebrow">Contact</p>
+          <h2 className="section__title">
+            Let’s build the next <span>great product</span>
+          </h2>
         </div>
-        <div className="app__footer-card">
-          <img src={images.mobile} alt="phone" />
-          <a href="tel:+ (389) 75-949-782" className="p-text">
-            + (389) 75-949-782
-          </a>
-        </div>
+        <p className="p-text">
+          Let's connect and build something great together.
+        </p>
       </div>
-      {!isFormSubmitted ? (
-        <div className="app__footer-form app__flex">
-          <div className="app__flex">
-            <input
-              className="p-text"
-              type="text"
-              placeholder="Your Name"
-              name="username"
-              value={username}
-              onChange={handleChangeInput}
-            />
+
+      <div className="contact__canvas">
+        <div className="contact__panel contact__panel--intro">
+          <div className="contact__panel-head">
+            <h3>Work with me</h3>
+            <div className="contact__status">
+              <span />
+              Available now
+            </div>
           </div>
-          <div className="app__flex">
-            <input
-              className="p-text"
-              type="email"
-              placeholder="Your Email"
-              name="email"
-              value={email}
-              onChange={handleChangeInput}
-            />
+          <p className="p-text">
+            Tell me where you’re headed. I’ll help you design, build and launch
+            a product that feels premium and performs.
+          </p>
+          <div className="contact__panel-actions">
+            <a href="mailto:viktor.jankuloski@hotmail.com">Email me</a>
+            <a href="tel:+ (389) 75-949-782">Call me</a>
           </div>
-          <div>
-            <textarea
-              className="p-text"
-              placeholder="Your Message"
-              value={message}
-              name="message"
-              onChange={handleChangeInput}
-            />
+          <div className="contact__channels">
+            <a href="mailto:viktor.jankuloski@hotmail.com">
+              <img src={images.email} alt="email" />
+              <div>
+                <span>Email</span>
+                <p>viktor.jankuloski@hotmail.com</p>
+              </div>
+            </a>
+            <a href="tel:+ (389) 75-949-782">
+              <img src={images.mobile} alt="phone" />
+              <div>
+                <span>Phone</span>
+                <p>+ (389) 75-949-782</p>
+              </div>
+            </a>
           </div>
-          <button type="button" className="p-text" onClick={handleSubmit}>
-            {!loading ? "Send Message" : "Sending..."}
-          </button>
         </div>
-      ) : (
-        <div>
-          <h3 className="head-text">Thank you for getting in touch!</h3>
-        </div>
-      )}
+
+        {!isFormSubmitted ? (
+          <div className="contact__panel contact__panel--form">
+            <div className="contact__panel-head">
+              <h3>Send a message</h3>
+            </div>
+            <div className="contact__form-grid">
+              <label>
+                Your Name
+                <input
+                  type="text"
+                  placeholder="Name"
+                  name="username"
+                  value={username}
+                  onChange={handleChangeInput}
+                />
+              </label>
+              <label>
+                Email Address
+                <input
+                  type="email"
+                  placeholder="Email"
+                  name="email"
+                  value={email}
+                  onChange={handleChangeInput}
+                />
+              </label>
+              <label className="contact__full">
+                Project Details
+                <textarea
+                  placeholder="Tell me about your goals, needs, and constraints."
+                  value={message}
+                  name="message"
+                  onChange={handleChangeInput}
+                />
+              </label>
+            </div>
+            <button type="button" onClick={handleSubmit}>
+              {!loading ? "Send Message" : "Sending..."}
+            </button>
+          </div>
+        ) : (
+          <div className="contact__panel contact__panel--thanks">
+            <h3 className="head-text">Thank you for getting in touch!</h3>
+            <p className="p-text">I will reply within the next 24 hours.</p>
+          </div>
+        )}
+      </div>
     </>
   );
 };
@@ -113,5 +143,5 @@ const Footer = () => {
 export default AppWrap(
   MotionWrap(Footer, "app__footer"),
   "contact",
-  "app__whitebg"
+  "app__whitebg",
 );
