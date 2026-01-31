@@ -37,9 +37,6 @@ const Testimonial = () => {
             Colleague <span>References</span>
           </h2>
         </div>
-        <p className="p-text">
-          Trusted by teams and collaborators across multiple projects.
-        </p>
       </div>
 
       {testimonials.length && (

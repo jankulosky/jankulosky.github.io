@@ -42,16 +42,8 @@ const Work = () => {
         <div className="section__heading">
           <p className="section__eyebrow">Personal Projects</p>
           <h2 className="section__title">
-            My <span>Work</span>
+            My Work <span>Projects</span>
           </h2>
-        </div>
-        <p className="p-text">
-          Built with a passion for innovation and creativity. Different tech stacks, polished and production ready.
-        </p>
-        <div className="work__hero-stats">
-          <span>Design</span>
-          <span>Engineering</span>
-          <span>Deployment</span>
         </div>
       </div>
 

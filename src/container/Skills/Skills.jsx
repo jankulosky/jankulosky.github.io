@@ -22,7 +22,10 @@ const Skills = () => {
     });
 
     client.fetch(skillsQuery).then((data) => {
-      setSkills(data);
+      const sortedSkills = [...data].sort((a, b) =>
+        a.name.localeCompare(b.name),
+      );
+      setSkills(sortedSkills);
     });
   }, []);
 
@@ -30,15 +33,11 @@ const Skills = () => {
     <>
       <div className="skills__hero">
         <div className="section__heading">
-          <p className="section__eyebrow">Toolkit</p>
+          <p className="section__eyebrow">Expertise</p>
           <h2 className="section__title">
             Skills & <span>Experience</span>
           </h2>
         </div>
-        <p className="p-text">
-          Modern frontend craftsmanship with a focus on reliable delivery and
-          clean architecture.
-        </p>
         <div className="skills__hero-badges">
           <span>Programming Languages</span>
           <span>Databases & Cloud</span>
@@ -50,7 +49,7 @@ const Skills = () => {
       <div className="skills__layout">
         <motion.div className="skills__skills-board">
           <div className="skills__board-head">
-            <h3>Expertise</h3>
+            <h3>Skillset</h3>
             <p className="p-text">
               Curated set of tools I use to design, ship and scale products.
             </p>

@@ -7,7 +7,7 @@
 .skills__hero {
   display: flex;
   align-items: flex-start;
-  justify-content: space-between;
+  justify-content: center;
   gap: 2rem;
   flex-wrap: wrap;
 }
@@ -57,7 +57,9 @@
   box-shadow: var(--shadow-soft);
   position: relative;
   overflow: hidden;
-  transition: transform 0.35s ease, box-shadow 0.35s ease,
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease,
     border-color 0.35s ease;
 
   &:hover {
@@ -111,9 +113,10 @@
   border-radius: var(--radius-md);
   border: 1px solid var(--border-color);
   background: rgba(255, 255, 255, 0.03);
-  transition: transform 0.3s ease, box-shadow 0.3s ease,
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
     border-color 0.3s ease;
-  cursor: pointer;
   position: relative;
   overflow: hidden;
 
@@ -149,11 +152,13 @@
   align-items: center;
   justify-content: center;
   background: rgba(255, 255, 255, 0.1);
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1),
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.1),
     0 12px 25px rgba(9, 20, 50, 0.35);
-  transition: transform 0.35s ease, box-shadow 0.35s ease,
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease,
     border-color 0.35s ease;
-  animation: skillFloat 6.5s ease-in-out infinite;
 
   img {
     width: 60%;
@@ -230,9 +235,10 @@
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid var(--border-color);
   box-shadow: var(--shadow-soft);
-  transition: transform 0.3s ease, box-shadow 0.3s ease,
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
     border-color 0.3s ease;
-  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: space-between;

@@ -25,10 +25,6 @@ const About = () => {
             means <span>Good Business</span>
           </h2>
         </div>
-        <p className="p-text">
-          Product-focused engineering with a love for clean UI and reliable
-          systems.
-        </p>
       </div>
 
       <div className="about__grid">

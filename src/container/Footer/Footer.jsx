@@ -49,9 +49,6 @@ const Footer = () => {
             Let’s build the next <span>great product</span>
           </h2>
         </div>
-        <p className="p-text">
-          Let's connect and build something great together.
-        </p>
       </div>
 
       <div className="contact__canvas">
@@ -135,6 +132,11 @@ const Footer = () => {
             <p className="p-text">I will reply within the next 24 hours.</p>
           </div>
         )}
+      </div>
+
+      <div className="copyright">
+        <p className="p-text">©2026 Viktor Jankuloski</p>
+        <p className="p-text">All rights reserved</p>
       </div>
     </>
   );
