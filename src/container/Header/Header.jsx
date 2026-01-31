@@ -1,24 +1,11 @@
-import React from "react";
+﻿import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { useState } from "react";
 import { AppWrap } from "../../wrapper";
 import { images } from "../../constants";
 import headerImg from "../../assets/header-img.svg";
 import AnimatedLetters from "../../components/AnimatedLetters";
 import "./Header.scss";
 import "animate.css";
-import { useEffect } from "react";
-
-const scaleVariants = {
-  whileInView: {
-    scale: [0, 1],
-    opacity: [0, 1],
-    transition: {
-      duration: 1,
-      ease: "easeInOut",
-    },
-  },
-};
 
 const Header = () => {
   const [letterClass, setLetterClass] = useState("text-animate");
@@ -36,81 +23,90 @@ const Header = () => {
   }, []);
 
   return (
-    <div className="app__header app__flex">
-      <motion.div
-        whileInView={{ x: [-100, 0], opacity: [0, 1] }}
-        transition={{ duration: 0.5 }}
-        className="app__header-info"
-      >
-        <div className="app__header-badge">
-          <div className="badge-cmp app__flex">
-            <div style={{ marginLeft: 20 }}>
-              <p className="p-intro">
-                <span className={letterClass}>H</span>
-                <span className={`${letterClass} _10`}>i</span>
-                <span className="hello-emoji" aria-hidden="true">
-                  👋
-                </span>
-              </p>
-              <h1 className="intro-text">
-                <AnimatedLetters
-                  letterClass={letterClass}
-                  strArray={greetingArray}
-                  idx={15}
-                />
-                <> </>
-                <AnimatedLetters
-                  letterClass={letterClass}
-                  strArray={nameArray}
-                  idx={15}
-                />
-              </h1>
-            </div>
+    <div className="hero">
+      <div className="hero__frame">
+        <motion.div
+          whileInView={{ y: [28, 0], opacity: [0, 1] }}
+          transition={{ duration: 0.7 }}
+          className="hero__copy"
+        >
+          <div className="hero__badge">
+            <span className="hero__hi">Hi</span>
+            <span className="hero__pulse" aria-hidden="true" />
           </div>
 
-          <div className="tag-cmp app__flex">
-            <p className="p-text">Software Engineer</p>
-            <p className="p-text">.NET, Node.js, Angular and React</p>
-          </div>
-          <div className="app__header-cta">
-            <a className="cta-primary" href="#work">
+          <h1 className="hero__title">
+            <AnimatedLetters
+              letterClass={letterClass}
+              strArray={greetingArray}
+              idx={15}
+            />
+            <> </>
+            <AnimatedLetters
+              letterClass={letterClass}
+              strArray={nameArray}
+              idx={15}
+            />
+          </h1>
+
+          <p className="hero__subtitle">
+            Full-stack software developer with a Bachelor's in Computer Science,
+            passionate about building and delivering high-quality software
+            solutions using proven methodologies/practices and technologies.
+          </p>
+
+          <div className="hero__cta">
+            <a className="hero__primary" href="#work">
               View Projects
             </a>
-            <a className="cta-secondary" href="#contact">
+            <a className="hero__secondary" href="#contact">
               Let’s Connect
             </a>
           </div>
-        </div>
-      </motion.div>
 
-      <div className="header">
+          <div className="hero__signals">
+            <div>
+              <span>Back-end</span>
+              <p>.NET · Node.js</p>
+            </div>
+            <div>
+              <span>Front-end</span>
+              <p>Angular · React · Next.js</p>
+            </div>
+            <div>
+              <span>Location</span>
+              <p>EU · Remote</p>
+            </div>
+          </div>
+        </motion.div>
+
         <motion.div
-          whileInView={{ opacity: [0, 1] }}
-          transition={{ duration: 0.5, delayChildren: 0.5 }}
-          className="app__header-img animate__animated animate__zoomIn"
+          whileInView={{ opacity: [0, 1], y: [20, 0] }}
+          transition={{ duration: 0.8 }}
+          className="hero__visual"
         >
-          <img src={headerImg} alt="profile_bg" />
-          <motion.img
-            whileInView={{ scale: [0, 1] }}
-            transition={{ duration: 1, ease: "easeInOut" }}
-            src={images.circle}
-            alt="profile_circle"
-            className="overlay_circle"
-          />
+          <div className="hero__avatar">
+            <img src={headerImg} alt="astronaut" />
+            <div className="hero__ring" />
+          </div>
+          <div className="hero__chips">
+            {[images.angular, images.dotnet, images.react].map(
+              (chip, index) => (
+                <div className="hero__chip" key={`chip-${index}`}>
+                  <img src={chip} alt="tech" />
+                </div>
+              ),
+            )}
+          </div>
         </motion.div>
       </div>
 
-      <motion.div
-        variants={scaleVariants}
-        whileInView={scaleVariants.whileInView}
-        className="app__header-circles"
-      >
-        {[images.angular, images.dotnet, images.react].map((circle, index) => (
-          <div className="circle-cmp app__flex" key={`circle-${index}`}>
-            <img src={circle} alt="profile_bg" />
-          </div>
-        ))}
-      </motion.div>
+      <div className="hero__marquee">
+        <span>Design Systems</span>
+        <span>API Integration</span>
+        <span>UX Engineering</span>
+        <span>Performance</span>
+      </div>
     </div>
   );
 };
