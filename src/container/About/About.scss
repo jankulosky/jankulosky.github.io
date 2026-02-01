@@ -12,18 +12,10 @@
   flex-wrap: wrap;
 }
 
-.about__eyebrow {
-  text-transform: uppercase;
-  letter-spacing: 0.32em;
-  font-size: 0.7rem;
-  color: var(--accent-color);
-  margin-bottom: 0.6rem;
-}
-
 .about__grid {
   margin-top: 2.5rem;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-template-columns: repeat(2, minmax(34rem, 1fr));
   gap: 2rem;
 }
 

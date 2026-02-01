@@ -1,4 +1,4 @@
-﻿import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { AppWrap } from "../../wrapper";
 import { images } from "../../constants";
@@ -31,22 +31,23 @@ const Header = () => {
           className="hero__copy"
         >
           <div className="hero__badge">
-            <span className="hero__hi">Hi</span>
+            <span className={`letterClass ${letterClass} hero__hi`}>Hi</span>
             <span className="hero__pulse" aria-hidden="true" />
           </div>
 
-          <h1 className="hero__title">
-            <AnimatedLetters
-              letterClass={letterClass}
-              strArray={greetingArray}
-              idx={15}
-            />
-            <> </>
-            <AnimatedLetters
-              letterClass={letterClass}
-              strArray={nameArray}
-              idx={15}
-            />
+          <h1 className="hero__title hero__title--glow">
+            <span className="hero__title-line">
+              <AnimatedLetters
+                letterClass={letterClass}
+                strArray={greetingArray}
+                idx={15}
+              />
+              <AnimatedLetters
+                letterClass={letterClass}
+                strArray={nameArray}
+                idx={15}
+              />
+            </span>
           </h1>
 
           <p className="hero__subtitle">

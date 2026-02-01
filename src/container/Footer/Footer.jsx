@@ -1,13 +1,13 @@
 import React, { useState } from "react";
+import emailjs from "@emailjs/browser";
 
 import { images } from "../../constants";
 import { AppWrap, MotionWrap } from "../../wrapper";
-import { client } from "../../client";
 import "./Footer.scss";
 
 const Footer = () => {
   const [formData, setFormData] = useState({
-    name: "",
+    username: "",
     email: "",
     message: "",
   });
@@ -24,20 +24,33 @@ const Footer = () => {
   const handleSubmit = () => {
     setLoading(true);
 
-    const contact = {
-      _type: "contact",
-      name: formData.username,
-      email: formData.email,
+    const templateParams = {
+      from_name: formData.username,
+      from_email: formData.email,
       message: formData.message,
+      subject: `Portfolio contact from ${formData.username}`,
     };
 
-    client
-      .create(contact)
+    emailjs
+      .send(
+        process.env.REACT_APP_EMAILJS_SERVICE_ID,
+        process.env.REACT_APP_EMAILJS_TEMPLATE_ID,
+        templateParams,
+        process.env.REACT_APP_EMAILJS_PUBLIC_KEY,
+      )
       .then(() => {
         setLoading(false);
         setIsFormSubmitted(true);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.error(err);
+        setLoading(false);
+      });
+  };
+
+  const handleReset = () => {
+    setFormData({ username: "", email: "", message: "" });
+    setIsFormSubmitted(false);
   };
 
   return (
@@ -130,6 +143,13 @@ const Footer = () => {
           <div className="contact__panel contact__panel--thanks">
             <h3 className="head-text">Thank you for getting in touch!</h3>
             <p className="p-text">I will reply within the next 24 hours.</p>
+            <button
+              type="button"
+              className="contact__reset"
+              onClick={handleReset}
+            >
+              Send another message
+            </button>
           </div>
         )}
       </div>

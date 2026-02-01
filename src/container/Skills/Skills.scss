@@ -12,18 +12,14 @@
   flex-wrap: wrap;
 }
 
-.skills__eyebrow {
-  text-transform: uppercase;
-  letter-spacing: 0.32em;
-  font-size: 0.7rem;
-  color: var(--accent-color);
-  margin-bottom: 0.6rem;
-}
-
 .skills__hero-badges {
   display: flex;
   gap: 0.8rem;
   flex-wrap: wrap;
+
+  @media screen and (max-width: 900px) {
+    justify-content: center;
+  }
 
   span {
     padding: 0.35rem 0.9rem;
@@ -40,7 +36,7 @@
 .skills__layout {
   margin-top: 2.5rem;
   display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  grid-template-columns: repeat(2, minmax(34rem, 1fr));
   gap: 2rem;
 
   @media screen and (max-width: 900px) {
@@ -183,13 +179,6 @@
   color: var(--text-color);
   font-weight: 600;
   font-size: 1rem;
-}
-
-.skills__chip-tag {
-  font-size: 0.65rem;
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
-  color: var(--accent-color);
 }
 
 .skills__exp-list {
