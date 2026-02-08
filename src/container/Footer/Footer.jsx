@@ -13,22 +13,44 @@ const Footer = () => {
   });
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [errors, setErrors] = useState({});
 
   const { username, email, message } = formData;
 
   const handleChangeInput = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
+    if (errors[name]) {
+      setErrors({ ...errors, [name]: "" });
+    }
   };
 
   const handleSubmit = () => {
+    const nextErrors = {};
+    if (!formData.username.trim()) {
+      nextErrors.username = "Please enter your name.";
+    }
+    if (!formData.email.trim()) {
+      nextErrors.email = "Please enter your email.";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email.trim())) {
+      nextErrors.email = "Please enter a valid email address.";
+    }
+    if (!formData.message.trim()) {
+      nextErrors.message = "Please enter a short message.";
+    }
+
+    if (Object.keys(nextErrors).length > 0) {
+      setErrors(nextErrors);
+      return;
+    }
+
     setLoading(true);
 
     const templateParams = {
       from_name: formData.username,
       from_email: formData.email,
       message: formData.message,
-      subject: `Portfolio contact from ${formData.username}`,
+      subject: `Message from ${formData.username}`,
     };
 
     emailjs
@@ -51,6 +73,7 @@ const Footer = () => {
   const handleReset = () => {
     setFormData({ username: "", email: "", message: "" });
     setIsFormSubmitted(false);
+    setErrors({});
   };
 
   return (
@@ -105,7 +128,7 @@ const Footer = () => {
               <h3>Send a message</h3>
             </div>
             <div className="contact__form-grid">
-              <label>
+              <label className={errors.username ? "has-error" : ""}>
                 Your Name
                 <input
                   type="text"
@@ -114,8 +137,11 @@ const Footer = () => {
                   value={username}
                   onChange={handleChangeInput}
                 />
+                {errors.username && (
+                  <span className="contact__error">{errors.username}</span>
+                )}
               </label>
-              <label>
+              <label className={errors.email ? "has-error" : ""}>
                 Email Address
                 <input
                   type="email"
@@ -124,15 +150,23 @@ const Footer = () => {
                   value={email}
                   onChange={handleChangeInput}
                 />
+                {errors.email && (
+                  <span className="contact__error">{errors.email}</span>
+                )}
               </label>
-              <label className="contact__full">
-                Project Details
+              <label
+                className={`contact__full ${errors.message ? "has-error" : ""}`}
+              >
+                Your Message
                 <textarea
                   placeholder="Tell me about your goals, needs, and constraints."
                   value={message}
                   name="message"
                   onChange={handleChangeInput}
                 />
+                {errors.message && (
+                  <span className="contact__error">{errors.message}</span>
+                )}
               </label>
             </div>
             <button type="button" onClick={handleSubmit}>

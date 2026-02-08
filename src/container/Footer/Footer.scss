@@ -12,7 +12,6 @@
   flex-wrap: wrap;
 }
 
-
 .contact__canvas {
   margin-top: 2.5rem;
   display: grid;
@@ -38,7 +37,9 @@
   border-radius: var(--radius-xl);
   padding: 2.5rem;
   box-shadow: var(--shadow-soft);
-  transition: transform 0.35s ease, box-shadow 0.35s ease,
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease,
     border-color 0.35s ease;
   position: relative;
   overflow: hidden;
@@ -56,7 +57,8 @@
 
 .contact__panel--intro {
   grid-area: intro;
-  background: linear-gradient(
+  background:
+    linear-gradient(
       135deg,
       rgba(91, 140, 255, 0.18),
       rgba(255, 255, 255, 0.02)
@@ -154,7 +156,9 @@
     border: 1px solid rgba(255, 255, 255, 0.18);
     text-decoration: none;
     color: inherit;
-    transition: transform 0.3s ease, border-color 0.3s ease,
+    transition:
+      transform 0.3s ease,
+      border-color 0.3s ease,
       box-shadow 0.3s ease;
 
     img {
@@ -195,7 +199,6 @@
   }
 }
 
-
 .contact__form-grid {
   margin-top: 1.4rem;
   display: grid;
@@ -210,6 +213,7 @@
     text-transform: uppercase;
     letter-spacing: 0.18em;
     color: var(--muted-color);
+    position: relative;
   }
 
   input,
@@ -222,12 +226,15 @@
     color: var(--text-color);
     font-family: var(--font-base);
     outline: none;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    transition:
+      border-color 0.3s ease,
+      box-shadow 0.3s ease;
   }
 
   textarea {
     min-height: 160px;
     resize: vertical;
+    max-height: 18.75rem;
   }
 
   input:focus,
@@ -237,8 +244,28 @@
   }
 }
 
+.contact__form-grid input:-webkit-autofill,
+.contact__form-grid textarea:-webkit-autofill {
+  -webkit-text-fill-color: var(--text-color);
+  transition: background-color 9999s ease-in-out 0s;
+}
+
 .contact__full {
   grid-column: 1 / -1;
+}
+
+.contact__error {
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  color: #ffb3b3;
+  text-transform: none;
+  display: block;
+}
+
+.has-error input,
+.has-error textarea {
+  border-color: #ff6b6b;
+  box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.18);
 }
 
 .contact__panel--form button {
@@ -267,11 +294,8 @@
   padding: 0.85rem 1.9rem;
   border-radius: 999px;
   border: 1px solid rgba(36, 198, 183, 0.4);
-  background: linear-gradient(
-      120deg,
-      rgba(36, 198, 183, 0.2),
-      rgba(255, 255, 255, 0.04)
-    ),
+  background:
+    linear-gradient(120deg, rgba(36, 198, 183, 0.2), rgba(255, 255, 255, 0.04)),
     rgba(255, 255, 255, 0.02);
   color: var(--accent-color);
   font-weight: 600;
