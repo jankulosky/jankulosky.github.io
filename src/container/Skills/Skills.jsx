@@ -90,31 +90,34 @@ const Skills = () => {
                   <span>{experience.year}</span>
                 </div>
                 <div className="skills__exp-roles">
-                  {experience.works.map((work) => (
-                    <React.Fragment key={work.name}>
-                      <motion.div
-                        whileInView={{ opacity: [0, 1] }}
-                        transition={{ duration: 0.5 }}
-                        className="skills__exp-card"
-                        data-tip
-                        data-for={work.name}
-                      >
-                        <div>
-                          <h4>{work.name}</h4>
-                          <p>{work.company}</p>
-                        </div>
-                        <span className="skills__exp-dot" />
-                      </motion.div>
-                      <ReactTooltip
-                        id={work.name}
-                        effect="solid"
-                        arrowColor="#141a2a"
-                        className="skills-tooltip"
-                      >
-                        {work.desc}
-                      </ReactTooltip>
-                    </React.Fragment>
-                  ))}
+                  {experience.works.map((work, workIndex) => {
+                    const tooltipId = `${experience.year}-${work.name}-${workIndex}`;
+                    return (
+                      <React.Fragment key={tooltipId}>
+                        <motion.div
+                          whileInView={{ opacity: [0, 1] }}
+                          transition={{ duration: 0.5 }}
+                          className="skills__exp-card"
+                          data-tip
+                          data-for={tooltipId}
+                        >
+                          <div>
+                            <h4>{work.name}</h4>
+                            <p>{work.company}</p>
+                          </div>
+                          <span className="skills__exp-dot" />
+                        </motion.div>
+                        <ReactTooltip
+                          id={tooltipId}
+                          effect="solid"
+                          arrowColor="#141a2a"
+                          className="skills-tooltip"
+                        >
+                          {work.desc}
+                        </ReactTooltip>
+                      </React.Fragment>
+                    );
+                  })}
                 </div>
               </motion.div>
             ))}
