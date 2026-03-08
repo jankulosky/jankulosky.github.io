@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import emailjs from "@emailjs/browser";
 
 import { images } from "../../constants";
-import { AppWrap, MotionWrap } from "../../wrapper";
+import { AppWrap, MotionWrap } from "../../layout";
 import "./Footer.scss";
 
 const Footer = () => {

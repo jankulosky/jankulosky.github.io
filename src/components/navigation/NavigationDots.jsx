@@ -1,13 +1,14 @@
 import React from "react";
+import { NAV_SECTIONS } from "../../constants";
 import {
   getPathForSection,
   navigateToSection,
   shouldHandleClientNav,
-} from "../utils/sectionNavigation";
+} from "../../utils/sectionNavigation";
 
 const NavigationDots = ({ active }) => (
   <div className="app__navigation">
-    {["home", "about", "work", "skills", "contact"].map((item, index) => (
+    {NAV_SECTIONS.map((item, index) => (
       <a
         href={getPathForSection(item)}
         key={item + index}

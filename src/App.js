@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { About, Footer, Header, Skills, Testimonial, Work } from "./container";
+import { About, Footer, Header, Skills, Testimonial, Work } from "./sections";
 import { Navbar } from "./components";
 import {
   getCurrentSectionFromPath,

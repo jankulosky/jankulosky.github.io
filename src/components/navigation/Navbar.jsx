@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { HiMenuAlt4, HiX } from "react-icons/hi";
 import { motion } from "framer-motion";
 
-import { images } from "../../constants";
+import { images, NAV_SECTIONS } from "../../constants";
 import {
   getPathForSection,
   navigateToSection,
@@ -12,7 +12,7 @@ import "./Navbar.scss";
 
 const Navbar = () => {
   const [toggle, setToggle] = useState(false);
-  const sections = ["home", "about", "work", "skills", "contact"];
+  const sections = NAV_SECTIONS;
 
   const handleNavClick = (event, section, closeMenu = false) => {
     if (!shouldHandleClientNav(event)) return;

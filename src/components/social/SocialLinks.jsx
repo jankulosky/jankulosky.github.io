@@ -2,7 +2,7 @@ import React from "react";
 import { BsLinkedin, BsGithub } from "react-icons/bs";
 import { FaFacebookF, FaEnvelope } from "react-icons/fa";
 
-const SocialMedia = () => {
+const SocialLinks = () => {
   return (
     <div className="app__social">
       <a
@@ -27,4 +27,4 @@ const SocialMedia = () => {
   );
 };
 
-export default SocialMedia;
+export default SocialLinks;

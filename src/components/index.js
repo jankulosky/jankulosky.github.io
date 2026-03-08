@@ -1,3 +1,4 @@
-export { default as Navbar } from "./Navbar/Navbar";
-export { default as NavigationDots } from "./NavigationDots";
-export { default as SocialMedia } from "./SocialMedia";
+export { default as Navbar } from "./navigation/Navbar";
+export { default as NavigationDots } from "./navigation/NavigationDots";
+export { default as SocialLinks } from "./social/SocialLinks";
+export { default as AnimatedLetters } from "./typography/AnimatedLetters";

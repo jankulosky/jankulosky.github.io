@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { AppWrap } from "../../wrapper";
+import { AppWrap } from "../../layout";
 import { images } from "../../constants";
 import headerImg from "../../assets/header-img.svg";
-import AnimatedLetters from "../../components/AnimatedLetters";
+import { AnimatedLetters } from "../../components";
 import {
   getPathForSection,
   navigateToSection,

@@ -1,4 +1,4 @@
-const SECTIONS = ["home", "about", "work", "skills", "testimonial", "contact"];
+import { ALL_SECTIONS } from "../constants";
 
 const normalizePathname = (pathname) => pathname.replace(/\/+$/, "") || "/";
 
@@ -8,7 +8,7 @@ export const getCurrentSectionFromPath = () => {
   const lastSegment = segments[segments.length - 1];
 
   if (!lastSegment) return "home";
-  if (SECTIONS.includes(lastSegment)) return lastSegment;
+  if (ALL_SECTIONS.includes(lastSegment)) return lastSegment;
   return "home";
 };
 
@@ -19,7 +19,7 @@ export const getBasePath = () => {
   if (!segments.length) return "";
 
   const lastSegment = segments[segments.length - 1];
-  if (SECTIONS.includes(lastSegment)) segments.pop();
+  if (ALL_SECTIONS.includes(lastSegment)) segments.pop();
 
   return segments.length ? `/${segments.join("/")}` : "";
 };
@@ -57,4 +57,3 @@ export const shouldHandleClientNav = (event) =>
     event.altKey ||
     event.shiftKey
   );
-
