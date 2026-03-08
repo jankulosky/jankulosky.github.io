@@ -3,27 +3,48 @@ import { HiMenuAlt4, HiX } from "react-icons/hi";
 import { motion } from "framer-motion";
 
 import { images } from "../../constants";
+import {
+  getPathForSection,
+  navigateToSection,
+  shouldHandleClientNav,
+} from "../../utils/sectionNavigation";
 import "./Navbar.scss";
 
 const Navbar = () => {
   const [toggle, setToggle] = useState(false);
+  const sections = ["home", "about", "work", "skills", "contact"];
+
+  const handleNavClick = (event, section, closeMenu = false) => {
+    if (!shouldHandleClientNav(event)) return;
+
+    event.preventDefault();
+    navigateToSection(section);
+
+    if (closeMenu) setToggle(false);
+  };
 
   return (
     <nav className="app__navbar">
       <div className="app__navbar-logo">
-        <a className="logo-orbit" href="#home" aria-label="Go to top">
+        <a
+          className="logo-orbit"
+          href={getPathForSection("home")}
+          aria-label="Go to top"
+          onClick={(event) => handleNavClick(event, "home")}
+        >
           <img src={images.astronaut} alt="logo" />
         </a>
-        <div className="app__navbar-brand">
-          <p>Viktor Jankuloski</p>
-          <span>Software Engineer</span>
-        </div>
       </div>
       <ul className="app__navbar-links">
-        {["home", "about", "work", "skills", "contact"].map((item) => (
+        {sections.map((item) => (
           <li className="app__flex p-text" key={`link-${item}`}>
             <div />
-            <a href={`#${item}`}>{item}</a>
+            <a
+              href={getPathForSection(item)}
+              onClick={(event) => handleNavClick(event, item)}
+            >
+              {item}
+            </a>
           </li>
         ))}
       </ul>
@@ -38,9 +59,12 @@ const Navbar = () => {
           >
             <HiX onClick={() => setToggle(false)} />
             <ul>
-              {["home", "about", "work", "skills", "contact"].map((item) => (
+              {sections.map((item) => (
                 <li key={item}>
-                  <a href={`#${item}`} onClick={() => setToggle(false)}>
+                  <a
+                    href={getPathForSection(item)}
+                    onClick={(event) => handleNavClick(event, item, true)}
+                  >
                     {item}
                   </a>
                 </li>

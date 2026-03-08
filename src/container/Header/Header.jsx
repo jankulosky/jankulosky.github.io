@@ -4,6 +4,11 @@ import { AppWrap } from "../../wrapper";
 import { images } from "../../constants";
 import headerImg from "../../assets/header-img.svg";
 import AnimatedLetters from "../../components/AnimatedLetters";
+import {
+  getPathForSection,
+  navigateToSection,
+  shouldHandleClientNav,
+} from "../../utils/sectionNavigation";
 import "./Header.scss";
 import "animate.css";
 
@@ -21,6 +26,12 @@ const Header = () => {
       clearTimeout(timeoutId);
     };
   }, []);
+
+  const handleNavClick = (event, section) => {
+    if (!shouldHandleClientNav(event)) return;
+    event.preventDefault();
+    navigateToSection(section);
+  };
 
   return (
     <div className="hero">
@@ -57,10 +68,18 @@ const Header = () => {
           </p>
 
           <div className="hero__cta">
-            <a className="hero__primary" href="#work">
+            <a
+              className="hero__primary"
+              href={getPathForSection("work")}
+              onClick={(event) => handleNavClick(event, "work")}
+            >
               View Projects
             </a>
-            <a className="hero__secondary" href="#contact">
+            <a
+              className="hero__secondary"
+              href={getPathForSection("contact")}
+              onClick={(event) => handleNavClick(event, "contact")}
+            >
               Let’s Connect
             </a>
           </div>

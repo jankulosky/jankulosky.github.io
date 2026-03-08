@@ -27,6 +27,14 @@
     font-size: 0.7rem;
     letter-spacing: 0.18em;
     text-transform: uppercase;
+    transition:
+      transform 0.3s ease,
+      box-shadow 0.3s ease;
+  }
+
+  span:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 15px 30px rgba(36, 198, 183, 0.25);
   }
 }
 

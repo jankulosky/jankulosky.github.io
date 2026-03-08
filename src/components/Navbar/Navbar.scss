@@ -116,26 +116,6 @@
   }
 }
 
-.app__navbar-brand {
-  display: flex;
-  flex-direction: column;
-  gap: 0.1rem;
-  font-family: var(--font-display);
-  color: var(--text-color);
-
-  p {
-    font-size: 0.95rem;
-    letter-spacing: -0.02em;
-  }
-
-  span {
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    letter-spacing: 0.28em;
-    color: var(--muted-color);
-  }
-}
-
 .app__navbar-links {
   flex: 1;
   display: flex;
