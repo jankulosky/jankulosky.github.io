@@ -3,7 +3,8 @@ import { AiFillEye, AiFillGithub } from "react-icons/ai";
 import { motion } from "framer-motion";
 
 import { AppWrap, MotionWrap } from "../../layout";
-import { urlFor, client } from "../../client";
+import { urlFor } from "../../client";
+import { fetchWorks } from "../../services/portfolioData";
 import "./Work.scss";
 
 const Work = () => {
@@ -13,9 +14,7 @@ const Work = () => {
   const [animateCard, setAnimateCard] = useState({ y: 0, opacity: 1 });
 
   useEffect(() => {
-    const query = '*[_type == "works"]';
-
-    client.fetch(query).then((data) => {
+    fetchWorks().then((data) => {
       setWorks(data);
       setFilterWork(data);
     });
@@ -23,10 +22,10 @@ const Work = () => {
 
   const handleWorkFilter = (item) => {
     setActiveFilter(item);
-    setAnimateCard([{ y: 100, opacity: 0 }]);
+    setAnimateCard({ y: 100, opacity: 0 });
 
     setTimeout(() => {
-      setAnimateCard([{ y: 0, opacity: 1 }]);
+      setAnimateCard({ y: 0, opacity: 1 });
 
       if (item === "All") {
         setFilterWork(works);

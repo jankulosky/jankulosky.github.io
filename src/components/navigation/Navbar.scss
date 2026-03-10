@@ -96,10 +96,6 @@
     width: 2.2rem;
     padding: 0;
     justify-content: center;
-
-    span {
-      display: none;
-    }
   }
 }
 
@@ -248,92 +244,285 @@ html[data-theme="light"] .app__theme-toggle {
 }
 
 .app__navbar-menu {
-  width: 35px;
-  height: 35px;
-  border-radius: 50%;
   position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: var(--accent-color);
-  position: relative;
-
-  svg {
-    width: 70%;
-    height: 70%;
-    color: #061816;
-  }
-
-  div {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    z-index: 5;
-
-    padding: 1rem;
-
-    width: 80%;
-    height: 100vh;
-
-    display: flex;
-    justify-content: flex-end;
-    align-items: flex-end;
-    flex-direction: column;
-
-    background: var(--menu-bg);
-
-    box-shadow: var(--shadow-soft);
-
-    svg {
-      width: 35px;
-      height: 35px;
-      color: var(--accent-color);
-      margin: 0.5rem 1rem;
-    }
-
-    ul {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      width: 100%;
-
-      display: flex;
-      justify-content: flex-start;
-      align-items: flex-start;
-      flex-direction: column;
-
-      li {
-        margin: 1rem;
-
-        a {
-          color: var(--muted-color);
-          text-decoration: none;
-          font-size: 1rem;
-          text-transform: uppercase;
-          font-weight: 600;
-          letter-spacing: 0.12em;
-          padding: 0.4rem 0.9rem;
-          border-radius: 999px;
-
-          transition: all 0.3s ease-in-out;
-
-          &:hover {
-            color: #0a1326;
-            background: var(--accent-color);
-          }
-        }
-      }
-    }
-
-    @media screen and (min-width: 1100px) {
-      display: none;
-    }
-  }
 
   @media screen and (min-width: 1100px) {
     display: none;
   }
+}
 
+.app__navbar-menu-trigger {
+  width: 2.45rem;
+  height: 2.45rem;
+  border-radius: 0.9rem;
+  border: 1px solid rgba(91, 236, 255, 0.4);
+  background: linear-gradient(
+      160deg,
+      rgba(91, 236, 255, 0.28),
+      rgba(91, 140, 255, 0.14)
+    ),
+    rgba(12, 22, 40, 0.9);
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  box-shadow:
+    0 16px 34px rgba(8, 18, 40, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.14);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.3s ease,
+    border-color 0.3s ease,
+    filter 0.3s ease;
+
+  svg {
+    width: 1.3rem;
+    height: 1.3rem;
+    color: #082d2b;
+    transition: transform 0.3s ease;
+  }
+
+  &:hover {
+    transform: translateY(-2px) scale(1.03);
+    border-color: rgba(91, 236, 255, 0.66);
+    filter: saturate(1.08);
+    box-shadow:
+      0 20px 40px rgba(8, 18, 40, 0.46),
+      inset 0 1px 0 rgba(255, 255, 255, 0.2);
+
+    svg {
+      transform: rotate(-8deg);
+    }
+  }
+
+  &:active {
+    transform: translateY(0) scale(0.98);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow:
+      0 0 0 3px rgba(91, 236, 255, 0.26),
+      0 20px 40px rgba(8, 18, 40, 0.46);
+  }
+}
+
+html[data-theme="light"] .app__navbar-menu-trigger {
+  background: linear-gradient(
+      160deg,
+      rgba(15, 158, 167, 0.22),
+      rgba(47, 116, 212, 0.16)
+    ),
+    rgba(255, 255, 255, 0.96);
+  border-color: rgba(15, 158, 167, 0.34);
+  box-shadow:
+    0 12px 28px rgba(29, 66, 130, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.85);
+}
+
+.app__navbar-menu-backdrop {
+  position: fixed;
+  inset: 0;
+  border: none;
+  z-index: 19;
+  cursor: pointer;
+  background: radial-gradient(
+      130% 100% at 100% 0%,
+      rgba(91, 236, 255, 0.12),
+      transparent 55%
+    ),
+    rgba(4, 8, 18, 0.58);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+html[data-theme="light"] .app__navbar-menu-backdrop {
+  background: rgba(16, 38, 70, 0.2);
+}
+
+.app__navbar-menu-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: min(23rem, 92vw);
+  z-index: 20;
+  border-radius: 1.4rem 0 0 1.4rem;
+  border: 1px solid var(--border-color);
+  background:
+    linear-gradient(
+      175deg,
+      rgba(91, 236, 255, 0.08),
+      rgba(91, 140, 255, 0.05) 35%,
+      transparent 70%
+    ),
+    var(--menu-bg);
+  box-shadow:
+    0 30px 70px rgba(5, 12, 30, 0.54),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  padding: calc(env(safe-area-inset-top, 0px) + 1rem) 1rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  isolation: isolate;
+}
+
+.app__navbar-menu-panel::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: linear-gradient(
+    170deg,
+    rgba(91, 236, 255, 0.08) 0%,
+    transparent 28%,
+    rgba(91, 140, 255, 0.06) 100%
+  );
+  pointer-events: none;
+}
+
+.app__navbar-menu-panel::before {
+  content: "";
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  width: 2.25rem;
+  height: 0.22rem;
+  border-radius: 999px;
+  background: rgba(91, 236, 255, 0.45);
+  box-shadow: 0 0 16px rgba(91, 236, 255, 0.35);
+}
+
+.app__navbar-menu-close {
+  position: absolute;
+  top: calc(env(safe-area-inset-top, 0px) + 1rem);
+  right: 1rem;
+  width: 2.1rem;
+  height: 2.1rem;
+  border-radius: 0.65rem;
+  border: 1px solid var(--border-color);
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--accent-color);
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition:
+    transform 0.22s ease,
+    background-color 0.25s ease,
+    border-color 0.25s ease;
+
+  svg {
+    width: 1.2rem;
+    height: 1.2rem;
+  }
+
+  &:hover {
+    transform: rotate(90deg) scale(1.02);
+    background: rgba(91, 236, 255, 0.18);
+    border-color: rgba(91, 236, 255, 0.42);
+  }
+}
+
+.app__navbar-menu-panel ul {
+  list-style: none;
+  margin: 0;
+  padding: calc(env(safe-area-inset-top, 0px) + 3.1rem) 0 0.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.58rem;
+  overflow-y: auto;
+  min-height: 0;
+}
+
+.app__navbar-menu-panel li a {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  color: var(--text-color);
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.13em;
+  padding: 0.95rem 1rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background:
+    linear-gradient(120deg, rgba(91, 236, 255, 0.06), transparent 52%),
+    rgba(255, 255, 255, 0.03);
+  transition:
+    transform 0.25s ease,
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    color 0.25s ease;
+
+  &:hover {
+    transform: translateX(5px);
+    background:
+      linear-gradient(120deg, rgba(91, 236, 255, 0.24), transparent 55%),
+      rgba(91, 236, 255, 0.14);
+    border-color: rgba(91, 236, 255, 0.42);
+    color: var(--accent-color);
+  }
+
+  &:focus-visible {
+    outline: none;
+    border-color: rgba(91, 236, 255, 0.62);
+    box-shadow: 0 0 0 3px rgba(91, 236, 255, 0.2);
+  }
+
+  &::after {
+    content: ">";
+    margin-left: auto;
+    font-size: 0.75rem;
+    opacity: 0.6;
+    transform: translateX(-4px);
+    transition: transform 0.25s ease, opacity 0.25s ease;
+  }
+
+  &:hover::after {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+html[data-theme="light"] .app__navbar-menu-panel {
+  box-shadow:
+    0 28px 62px rgba(22, 48, 94, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.65);
+}
+
+html[data-theme="light"] .app__navbar-menu-close {
+  background: rgba(18, 34, 63, 0.05);
+}
+
+html[data-theme="light"] .app__navbar-menu-panel li a {
+  background: rgba(18, 34, 63, 0.035);
+  border-color: rgba(18, 34, 63, 0.1);
+}
+
+html[data-theme="light"] .app__navbar-menu-panel li a:hover {
+  background:
+    linear-gradient(120deg, rgba(15, 158, 167, 0.2), transparent 55%),
+    rgba(15, 158, 167, 0.13);
+  border-color: rgba(15, 158, 167, 0.38);
+  color: #0d5f66;
+}
+
+@media screen and (max-width: 900px) {
+  .app__navbar-menu-panel {
+    width: 52vw;
+    min-width: 17rem;
+    max-width: 22rem;
+  }
+}
+
+@media screen and (max-width: 560px) {
+  .app__navbar-menu-panel {
+    width: 56vw;
+    min-width: 16rem;
+  }
 }

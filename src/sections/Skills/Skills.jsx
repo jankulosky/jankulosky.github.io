@@ -3,7 +3,11 @@ import { motion } from "framer-motion";
 import ReactTooltip from "react-tooltip";
 
 import { AppWrap, MotionWrap } from "../../layout";
-import { urlFor, client } from "../../client";
+import { urlFor } from "../../client";
+import {
+  fetchExperiences,
+  fetchSkills,
+} from "../../services/portfolioData";
 import "./Skills.scss";
 
 const Skills = () => {
@@ -11,17 +15,14 @@ const Skills = () => {
   const [skills, setSkills] = useState([]);
 
   useEffect(() => {
-    const query = '*[_type == "experiences"]';
-    const skillsQuery = '*[_type == "skills"]';
-
-    client.fetch(query).then((data) => {
+    fetchExperiences().then((data) => {
       const sortedData = [...data].sort(
         (a, b) => Number(b.year) - Number(a.year),
       );
       setExperiences(sortedData);
     });
 
-    client.fetch(skillsQuery).then((data) => {
+    fetchSkills().then((data) => {
       const sortedSkills = [...data].sort((a, b) =>
         a.name.localeCompare(b.name),
       );

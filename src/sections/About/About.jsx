@@ -2,15 +2,14 @@ import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { AppWrap, MotionWrap } from "../../layout";
 import "./About.scss";
-import { urlFor, client } from "../../client";
+import { urlFor } from "../../client";
+import { fetchAbouts } from "../../services/portfolioData";
 
 const About = () => {
   const [abouts, setAbouts] = useState([]);
 
   useEffect(() => {
-    const query = '*[_type == "abouts"]';
-
-    client.fetch(query).then((data) => {
+    fetchAbouts().then((data) => {
       setAbouts(data);
     });
   }, []);
