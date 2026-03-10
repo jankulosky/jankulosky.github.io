@@ -18,6 +18,10 @@
   }
 }
 
+html[data-theme="light"] .text-animate-hover:hover {
+  color: #00474b;
+}
+
 @for $i from 1 through 35 {
   .text-animate._#{$i} {
     animation-delay: #{$i / 20}s;

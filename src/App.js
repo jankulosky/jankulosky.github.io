@@ -5,10 +5,13 @@ import {
   getCurrentSectionFromPath,
   navigateToSection,
 } from "./utils/sectionNavigation";
+import { applyTheme, getInitialTheme } from "./utils/theme";
 import "./App.scss";
 
 const App = () => {
   useEffect(() => {
+    applyTheme(getInitialTheme(), { animate: false });
+
     const syncSectionWithPath = (replace = false) => {
       const section = getCurrentSectionFromPath();
       const behavior = replace ? "auto" : "smooth";

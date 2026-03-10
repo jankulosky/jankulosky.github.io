@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { HiMenuAlt4, HiX } from "react-icons/hi";
+import { BsMoonStarsFill, BsSunFill } from "react-icons/bs";
 import { motion } from "framer-motion";
 
 import { images, NAV_SECTIONS } from "../../constants";
@@ -8,10 +9,17 @@ import {
   navigateToSection,
   shouldHandleClientNav,
 } from "../../utils/sectionNavigation";
+import {
+  applyTheme,
+  getInitialTheme,
+  getNextTheme,
+  THEME_DARK,
+} from "../../utils/theme";
 import "./Navbar.scss";
 
 const Navbar = () => {
   const [toggle, setToggle] = useState(false);
+  const [theme, setTheme] = useState(getInitialTheme);
   const sections = NAV_SECTIONS;
 
   const handleNavClick = (event, section, closeMenu = false) => {
@@ -21,6 +29,20 @@ const Navbar = () => {
     navigateToSection(section);
 
     if (closeMenu) setToggle(false);
+  };
+
+  const handleThemeToggle = (event) => {
+    const bounds = event.currentTarget.getBoundingClientRect();
+    const origin = {
+      x: bounds.left + bounds.width / 2,
+      y: bounds.top + bounds.height / 2,
+    };
+
+    setTheme((currentTheme) => {
+      const nextTheme = getNextTheme(currentTheme);
+      applyTheme(nextTheme, { origin });
+      return nextTheme;
+    });
   };
 
   return (
@@ -49,29 +71,41 @@ const Navbar = () => {
         ))}
       </ul>
 
-      <div className="app__navbar-menu">
-        <HiMenuAlt4 onClick={() => setToggle(true)} />
+      <div className="app__navbar-actions">
+        <button
+          type="button"
+          className="app__theme-toggle"
+          onClick={handleThemeToggle}
+          aria-label={`Switch to ${theme === THEME_DARK ? "light" : "dark"} mode`}
+          title={`Switch to ${theme === THEME_DARK ? "light" : "dark"} mode`}
+        >
+          {theme === THEME_DARK ? <BsSunFill /> : <BsMoonStarsFill />}
+        </button>
 
-        {toggle && (
-          <motion.div
-            whileInView={{ x: [300, 0] }}
-            transition={{ duration: 0.85, ease: "easeOut" }}
-          >
-            <HiX onClick={() => setToggle(false)} />
-            <ul>
-              {sections.map((item) => (
-                <li key={item}>
-                  <a
-                    href={getPathForSection(item)}
-                    onClick={(event) => handleNavClick(event, item, true)}
-                  >
-                    {item}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </motion.div>
-        )}
+        <div className="app__navbar-menu">
+          <HiMenuAlt4 onClick={() => setToggle(true)} />
+
+          {toggle && (
+            <motion.div
+              whileInView={{ x: [300, 0] }}
+              transition={{ duration: 0.85, ease: "easeOut" }}
+            >
+              <HiX onClick={() => setToggle(false)} />
+              <ul>
+                {sections.map((item) => (
+                  <li key={item}>
+                    <a
+                      href={getPathForSection(item)}
+                      onClick={(event) => handleNavClick(event, item, true)}
+                    >
+                      {item}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+          )}
+        </div>
       </div>
     </nav>
   );
