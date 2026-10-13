@@ -90,13 +90,12 @@ const makeStreakTexture = () => {
 };
 
 export default class OrbitScene {
-  constructor(container, { reducedMotion = false, onIntroDone } = {}) {
+  constructor(container, { onIntroDone } = {}) {
     this.container = container;
-    this.reduced = reducedMotion;
     this.onIntroDone = onIntroDone;
     this.mobile = window.innerWidth < 768;
     this.disposables = [];
-    this.state = { warp: reducedMotion ? 0 : 1, intro: reducedMotion ? 1 : 0 };
+    this.state = { warp: 1, intro: 0 };
     this.pointer = new THREE.Vector2();
     this.pointerTarget = new THREE.Vector2();
     this.anchors = [{ key: "home", y: 0 }];
@@ -263,9 +262,7 @@ export default class OrbitScene {
       else color.setRGB(1, 1, 1);
       color.userSize = 1 + Math.pow(Math.random(), 7) * 4.5;
     });
-    this.starsMaterial = pointsMaterial(STARS_VERT, {
-      uTwinkle: { value: this.reduced ? 0 : 1 },
-    });
+    this.starsMaterial = pointsMaterial(STARS_VERT);
     sky.add(new THREE.Points(starGeometry, this.starsMaterial));
 
     const dustGeometry = makePoints(this.mobile ? 400 : 900, (point, color) => {
@@ -527,10 +524,6 @@ export default class OrbitScene {
   }
 
   playIntro() {
-    if (this.reduced) {
-      if (this.onIntroDone) this.onIntroDone();
-      return;
-    }
     this.introTimeline = gsap
       .timeline()
       .to(this.state, { intro: 1, duration: 3.4, ease: "power3.out" }, 0)
@@ -539,7 +532,6 @@ export default class OrbitScene {
   }
 
   warpPulse() {
-    if (this.reduced) return;
     gsap.killTweensOf(this.state, "warp");
     gsap
       .timeline()
@@ -594,15 +586,14 @@ export default class OrbitScene {
     this.frame = requestAnimationFrame(this.tick);
     const dt = clamp((now - this.lastTime) / 1000, 0, 0.05);
     this.lastTime = now;
-    const motion = this.reduced ? 0 : 1;
-    this.time += dt * motion;
+    this.time += dt;
 
     const pose = this.samplePose(window.scrollY);
-    const ease = this.reduced ? 1 : damp(2.6, dt);
+    const ease = damp(2.6, dt);
     this.camPos.lerp(pose.pos, ease);
     this.camTarget.lerp(pose.target, ease);
     this.shift += (pose.shift - this.shift) * ease;
-    this.pointer.lerp(this.pointerTarget, damp(3, dt) * motion);
+    this.pointer.lerp(this.pointerTarget, damp(3, dt));
 
     const camera = this.camera;
     this.tmpDir.subVectors(this.camTarget, this.camPos).normalize();
@@ -624,11 +615,11 @@ export default class OrbitScene {
       this.height,
     );
 
-    this.planet.rotation.y += dt * 0.012 * motion;
-    this.planetUniforms.uCloudOffset.value += dt * 0.0016 * motion;
-    this.moonAngle += dt * 0.045 * motion;
+    this.planet.rotation.y += dt * 0.012;
+    this.planetUniforms.uCloudOffset.value += dt * 0.0016;
+    this.moonAngle += dt * 0.045;
     this.placeMoon();
-    this.belt.rotation.y += dt * 0.006 * motion;
+    this.belt.rotation.y += dt * 0.006;
     this.starsMaterial.uniforms.uTime.value = this.time;
     this.dustMaterial.uniforms.uTime.value = this.time;
 

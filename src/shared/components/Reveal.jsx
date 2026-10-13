@@ -1,6 +1,5 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { useReducedMotion } from "../hooks/useMediaQuery";
 
 const EASE = [0.16, 1, 0.3, 1];
 
@@ -14,13 +13,6 @@ const Reveal = ({
   duration = 0.9,
   ...rest
 }) => {
-  const reduced = useReducedMotion();
-
-  if (reduced) {
-    const Tag = as;
-    return <Tag {...rest}>{children}</Tag>;
-  }
-
   const Component = motion[as];
   return (
     <Component

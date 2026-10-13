@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { prefersReducedMotion } from "./useMediaQuery";
 
 const GLYPHS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#%&*+=<>/\\";
 
@@ -8,14 +7,10 @@ const GLYPHS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#%&*+=<>/\\";
  * render `rest` invisibly and avoid layout shift while the text resolves.
  */
 export const useScramble = (text, { speed = 2.2, noiseLength = 10 } = {}) => {
-  const [progress, setProgress] = useState(() => (prefersReducedMotion() ? text.length : 0));
+  const [progress, setProgress] = useState(0);
   const [tick, setTick] = useState(0);
 
   useEffect(() => {
-    if (prefersReducedMotion()) {
-      setProgress(text.length);
-      return undefined;
-    }
     setProgress(0);
     let frame = 0;
     let current = 0;

@@ -2,20 +2,14 @@ import { useEffect, useState } from "react";
 import Lenis from "lenis";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { prefersReducedMotion } from "./useMediaQuery";
 
 gsap.registerPlugin(ScrollTrigger);
 
-/**
- * Smooth scrolling driven by GSAP's ticker so ScrollTrigger stays in sync.
- * Returns null when the user prefers reduced motion (native scrolling).
- */
+/** Smooth scrolling driven by GSAP's ticker so ScrollTrigger stays in sync. */
 export const useLenis = (options) => {
   const [lenis, setLenis] = useState(null);
 
   useEffect(() => {
-    if (prefersReducedMotion()) return undefined;
-
     const instance = new Lenis({
       duration: 1.15,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),

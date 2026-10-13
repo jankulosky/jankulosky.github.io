@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { FiArrowRight, FiMenu, FiX, FiZap, FiZapOff } from "react-icons/fi";
+import { FiArrowRight, FiMenu, FiX } from "react-icons/fi";
 import OrbitScene from "./OrbitScene";
 import {
   About,
@@ -17,8 +17,7 @@ import { scrollToSection, useLenis } from "../../shared/hooks/useLenis";
 import { useSectionRouting } from "../../shared/hooks/useSectionRouting";
 import { useActiveSection } from "../../shared/hooks/useActiveSection";
 import { useCursorFollower } from "../../shared/hooks/useCursorFollower";
-import { useFinePointer, useMediaQuery, useReducedMotion } from "../../shared/hooks/useMediaQuery";
-import { REDUCED_MOTION_QUERY, setMotionOverride } from "../../shared/motionPreference";
+import { useFinePointer } from "../../shared/hooks/useMediaQuery";
 import { PROFILE } from "../../shared/profile";
 import "./orbit.scss";
 
@@ -39,8 +38,6 @@ const Orbit = () => {
   useDesignShell({ className: "is-orbit", fonts: FONTS, themeColor: "#04030b" });
   const data = usePortfolio();
   const lenis = useLenis();
-  const reduced = useReducedMotion();
-  const systemReduced = useMediaQuery(REDUCED_MOTION_QUERY);
   const finePointer = useFinePointer();
   const stageRef = useRef(null);
   const sceneRef = useRef(null);
@@ -58,7 +55,6 @@ const Orbit = () => {
     let scene = null;
     try {
       scene = new OrbitScene(stageRef.current, {
-        reducedMotion: reduced,
         onIntroDone: () => setReady(true),
       });
       sceneRef.current = scene;
@@ -70,7 +66,7 @@ const Orbit = () => {
       if (scene) scene.dispose();
       sceneRef.current = null;
     };
-  }, [reduced]);
+  }, []);
 
   useEffect(() => {
     const update = () => {
@@ -87,7 +83,7 @@ const Orbit = () => {
       observer.disconnect();
       window.removeEventListener("resize", update);
     };
-  }, [data.status, reduced]);
+  }, [data.status]);
 
   useEffect(() => {
     const onScroll = () => {
@@ -106,11 +102,6 @@ const Orbit = () => {
     if (menuOpen) lenis.stop();
     else lenis.start();
   }, [menuOpen, lenis]);
-
-  const toggleMotion = () => {
-    const next = reduced ? "full" : "reduced";
-    setMotionOverride(next === (systemReduced ? "reduced" : "full") ? null : next);
-  };
 
   const { linkProps } = useSectionRouting(
     (section, { initial }) => {
@@ -159,18 +150,6 @@ const Orbit = () => {
             </a>
           ))}
         </nav>
-        {systemReduced && (
-          <button
-            type="button"
-            className="orbit__motion"
-            onClick={toggleMotion}
-            aria-pressed={!reduced}
-            title={reduced ? "Animations are minimized — enable full motion" : "Reduce animations"}
-          >
-            {reduced ? <FiZapOff /> : <FiZap />}
-            <span>{reduced ? "Motion off" : "Motion on"}</span>
-          </button>
-        )}
         <a className="orbit-btn orbit-btn--small orbit__cta" {...linkProps("contact")}>
           Get in touch <FiArrowRight />
         </a>

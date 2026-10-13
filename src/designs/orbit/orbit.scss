@@ -280,37 +280,6 @@ html.is-orbit {
   }
 }
 
-.orbit__motion {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  height: 40px;
-  padding: 0 14px;
-  border-radius: 999px;
-  border: 1px solid var(--line);
-  background: rgba(10, 10, 30, 0.6);
-  color: var(--muted);
-  font: 500 11px/1 var(--mono);
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition:
-    color 0.25s,
-    border-color 0.25s;
-
-  svg {
-    width: 15px;
-    height: 15px;
-    color: var(--sun);
-  }
-
-  &:hover {
-    color: var(--ink);
-    border-color: rgba(255, 190, 130, 0.5);
-  }
-}
-
 .orbit__menu {
   position: fixed;
   inset: 0;
@@ -362,15 +331,6 @@ html.is-orbit {
 @media (max-width: 480px) {
   .orbit__brand-text small {
     display: none;
-  }
-
-  .orbit__motion {
-    width: 40px;
-    padding: 0;
-
-    span {
-      display: none;
-    }
   }
 }
 
@@ -1926,21 +1886,5 @@ html.is-orbit {
   }
   to {
     transform: scaleX(1);
-  }
-}
-
-html.reduce-motion {
-  .orbit-ring__spin,
-  .orbit-node__face,
-  .orbit-tx__wave i,
-  .orbit-hero__signal i,
-  .orbit-system__core img,
-  .orbit__logo i {
-    animation-play-state: paused;
-  }
-
-  .orbit-hero__char,
-  .orbit-hero__fade {
-    transition: none;
   }
 }

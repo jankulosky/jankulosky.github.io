@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import { prefersReducedMotion } from "./useMediaQuery";
 
 /** Counts from 0 to `value` the first time the returned ref scrolls into view. */
 export const useCountUp = (value, { duration = 1600 } = {}) => {
@@ -25,10 +24,6 @@ export const useCountUp = (value, { duration = 1600 } = {}) => {
 
   useEffect(() => {
     if (!visible) return undefined;
-    if (prefersReducedMotion()) {
-      setDisplay(value);
-      return undefined;
-    }
     let frame = 0;
     const start = performance.now();
     const step = (now) => {

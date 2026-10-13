@@ -280,14 +280,12 @@ attribute float aPhase;
 attribute vec3 aColor;
 uniform float uTime;
 uniform float uPixelRatio;
-uniform float uTwinkle;
 varying vec3 vColor;
 varying float vAlpha;
 void main() {
   vec4 mv = modelViewMatrix * vec4(position, 1.0);
   gl_Position = projectionMatrix * mv;
   float twinkle = 0.7 + 0.3 * sin(uTime * (0.6 + aPhase * 1.8) + aPhase * 40.0);
-  twinkle = mix(1.0, twinkle, uTwinkle);
   gl_PointSize = aSize * uPixelRatio * (0.85 + 0.15 * twinkle);
   vColor = aColor;
   vAlpha = twinkle;
