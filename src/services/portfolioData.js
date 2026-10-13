@@ -1,18 +1,11 @@
 import { client } from "../client";
 
-const QUERIES = {
-  abouts: '*[_type == "abouts"]',
-  works: '*[_type == "works"]',
-  experiences: '*[_type == "experiences"]',
-  skills: '*[_type == "skills"]',
-  testimonials: '*[_type == "testimonials"]',
-  brands: '*[_type == "brands"]',
-};
+const PORTFOLIO_QUERY = `{
+  "abouts": *[_type == "abouts"] | order(_createdAt asc) { _id, title, description, imgUrl },
+  "works": *[_type == "works"] | order(_createdAt desc) { _id, _createdAt, title, description, projectLink, codeLink, imgUrl, tags },
+  "experiences": *[_type == "experiences"] { _id, year, works },
+  "skills": *[_type == "skills"] { _id, name, bgColor, icon },
+  "testimonials": *[_type == "testimonials"] | order(_createdAt asc) { _id, name, company, feedback, imageurl }
+}`;
 
-export const fetchAbouts = () => client.fetch(QUERIES.abouts);
-export const fetchWorks = () => client.fetch(QUERIES.works);
-export const fetchExperiences = () => client.fetch(QUERIES.experiences);
-export const fetchSkills = () => client.fetch(QUERIES.skills);
-export const fetchTestimonials = () => client.fetch(QUERIES.testimonials);
-export const fetchBrands = () => client.fetch(QUERIES.brands);
-
+export const fetchPortfolio = () => client.fetch(PORTFOLIO_QUERY);

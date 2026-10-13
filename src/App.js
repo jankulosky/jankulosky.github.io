@@ -1,42 +1,17 @@
-import React, { useEffect } from "react";
-import { About, Footer, Header, Skills, Testimonial, Work } from "./sections";
-import { Navbar } from "./components";
-import {
-  getCurrentSectionFromPath,
-  navigateToSection,
-} from "./utils/sectionNavigation";
-import { applyTheme, getInitialTheme } from "./utils/theme";
-import "./App.scss";
+import React, { useLayoutEffect } from "react";
+import Orbit from "./designs/orbit/Orbit";
+import { useReducedMotion } from "./shared/hooks/useMediaQuery";
 
 const App = () => {
-  useEffect(() => {
-    applyTheme(getInitialTheme(), { animate: false });
+  const reducedMotion = useReducedMotion();
 
-    const syncSectionWithPath = (replace = false) => {
-      const section = getCurrentSectionFromPath();
-      const behavior = replace ? "auto" : "smooth";
-      navigateToSection(section, { replace, behavior });
-    };
+  useLayoutEffect(() => {
+    document.documentElement.classList.toggle("reduce-motion", reducedMotion);
+    window.scrollTo(0, 0);
+  }, [reducedMotion]);
 
-    syncSectionWithPath(true);
-
-    const handlePopState = () => syncSectionWithPath(false);
-    window.addEventListener("popstate", handlePopState);
-
-    return () => window.removeEventListener("popstate", handlePopState);
-  }, []);
-
-  return (
-    <div className="app">
-      <Navbar />
-      <Header />
-      <About />
-      <Work />
-      <Skills />
-      <Testimonial />
-      <Footer />
-    </div>
-  );
+  // Remounting restarts the scene, smooth scrolling and intro with the new motion setting.
+  return <Orbit key={reducedMotion ? "calm" : "full"} />;
 };
 
 export default App;
